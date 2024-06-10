@@ -50,8 +50,22 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    #'django.contrib.sessions.middleware.SessionMiddleware',
+    #'django.contrib.auth.middleware.AuthenticationMiddleware',
+    #'django.contrib.messages.middleware.MessageMiddleware',
+    #'django.middleware.common.CommonMiddleware',
     
 ]
+# MIDDLEWARE = [
+#     # other middleware
+#     'corsheaders.middleware.CorsMiddleware',
+#     'django.contrib.sessions.middleware.SessionMiddleware',
+#     'django.contrib.auth.middleware.AuthenticationMiddleware',
+#     'django.contrib.messages.middleware.MessageMiddleware',
+#     'django.middleware.common.CommonMiddleware',
+#     # other middleware
+# ]
 
 ROOT_URLCONF = 'sfa.urls'
 
@@ -123,7 +137,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 #STATICFILES_DIRS=[BASE_DIR /'static']
 #STATICFILES_DIRS=os.path.join(BASE_DIR ,'static')
 #STATICFILES_ROOT=os.path.join(BASE_DIR ,'staticfiles_build','static')#
@@ -159,15 +173,7 @@ INSTALLED_APPS = [
 
 
 ]
-MIDDLEWARE = [
-    # other middleware
-    'corsheaders.middleware.CorsMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    # other middleware
-]
+
 # Allow all origins
 CORS_ALLOW_ALL_ORIGINS = True
 

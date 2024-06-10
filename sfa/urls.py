@@ -28,6 +28,8 @@ urlpatterns = [
     path('', include('PDF_processing.urls')),
    
     path('', include('authentication.urls')),
-]
+        path("admin/", admin.site.urls),
 
-#urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

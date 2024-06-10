@@ -94,21 +94,41 @@ import dj_database_url
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'new_schema1' ,
-        'USER': 'root',
-        'PASSWORD': 'Lodesmain@21',
-        'HOST': 'localhost',  # or the hostname where your MySQL server is running
-        'PORT': '3306',      # or the port on which your MySQL server is listening
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dbdb',
+        'USER': 'areeba',
+        'PASSWORD': '43Nxz4fLReGmij9A6Hy1rw',
+        'HOST': 'thick-peacock-14991.7tt.aws-us-east-1.cockroachlabs.cloud',
+        'PORT': '26257',  # Default CockroachDB port
     }
 }
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-DATABASES['default']['OPTIONS']['charset'] = 'utf8mb4'
-del DATABASES['default']['OPTIONS']['sslmode'] 
-DATABASES['default']['OPTIONS']['ssl'] =  {'ca': os.environ.get('MYSQL_ATTR_SSL_CA')}
+
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# DATABASES['default']['OPTIONS']['charset'] = 'utf8mb4'
+# del DATABASES['default']['OPTIONS']['sslmode'] 
+# DATABASES['default']['OPTIONS']['ssl'] =  {'ca': os.environ.get('MYSQL_ATTR_SSL_CA')}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'new_schema1' ,
+#         'USER': 'root',
+#         'PASSWORD': 'Lodesmain@21',
+#         'HOST': 'localhost',  # or the hostname where your MySQL server is running
+#         'PORT': '3306',      # or the port on which your MySQL server is listening
+#     }
+# }
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# #DATABASES['default']['OPTIONS']['charset'] = 'utf8mb4'
+# #del DATABASES['default']['OPTIONS']['sslmode'] 
+# DATABASES['default']['OPTIONS']['ssl'] =  {'ca': os.environ.get('MYSQL_ATTR_SSL_CA')}
 
 
 # Password validation

@@ -87,6 +87,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sfa.wsgi.application'
 
+# In settings.py
+import pymysql
+pymysql.install_as_MySQLdb()
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

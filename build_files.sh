@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Install system dependencies
 apt-get update
 apt-get install -y libmysqlclient-dev
@@ -8,4 +6,4 @@ apt-get install -y libmysqlclient-dev
 pip3 install -r requirements.txt
 
 # Collect static files
-python3 manage.py collectstatic --noinput
+python3 manage.py collectstatic 

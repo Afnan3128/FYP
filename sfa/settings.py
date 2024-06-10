@@ -10,12 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+from dotenv import load_dotenv
 
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -24,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-s3!4f4ucpai#d%x@i)&v7wcaatpra275@(e9c1d@x48+6h8!#g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['.vercel.app','.now.sh','127.0.0.1','localhost']
+DEBUG = True
+
+ALLOWED_HOSTS = ['*.vercel.app']
 
 
 # Application definition
@@ -38,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'PDF_processing',
-   
+    'PDF_processing'
+    
 ]
 
 MIDDLEWARE = [
@@ -50,22 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    #'django.contrib.sessions.middleware.SessionMiddleware',
-    #'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'django.contrib.messages.middleware.MessageMiddleware',
-    #'django.middleware.common.CommonMiddleware',
-    
 ]
-# MIDDLEWARE = [
-#     # other middleware
-#     'corsheaders.middleware.CorsMiddleware',
-#     'django.contrib.sessions.middleware.SessionMiddleware',
-#     'django.contrib.auth.middleware.AuthenticationMiddleware',
-#     'django.contrib.messages.middleware.MessageMiddleware',
-#     'django.middleware.common.CommonMiddleware',
-#     # other middleware
-# ]
 
 ROOT_URLCONF = 'sfa.urls'
 
@@ -87,48 +74,37 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sfa.wsgi.application'
 
-# In settings.py
-import pymysql
-pymysql.install_as_MySQLdb()
-import dj_database_url
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dbdb',
-        'USER': 'areeba',
-        'PASSWORD': '43Nxz4fLReGmij9A6Hy1rw',
-        'HOST': 'thick-peacock-14991.7tt.aws-us-east-1.cockroachlabs.cloud',
-        'PORT': '26257',  # Default CockroachDB port
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Path to your SQLite database file
     }
 }
-
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-# DATABASES['default']['OPTIONS']['charset'] = 'utf8mb4'
-# del DATABASES['default']['OPTIONS']['sslmode'] 
-# DATABASES['default']['OPTIONS']['ssl'] =  {'ca': os.environ.get('MYSQL_ATTR_SSL_CA')}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'new_schema1' ,
 #         'USER': 'root',
-#         'PASSWORD': 'Lodesmain@21',
+#         'PASSWORD': 'lodesmain@21A',
 #         'HOST': 'localhost',  # or the hostname where your MySQL server is running
 #         'PORT': '3306',      # or the port on which your MySQL server is listening
+#         # 'ENGINE': "django.db.backends.mysql",
+#         # 'NAME': os.getenv("DB_NAME"),
+#         # 'USER': os.getenv("DB_USER"),
+#         # 'PASSWORD': os.getenv("DB_PWD"),
+#         # 'HOST': os.getenv("DB_HOST"),  # or the hostname where your MySQL server is running
+#         # 'PORT': os.getenv("DB_PORT"),       # or the port on which your MySQL server is listening
+#         # "ENGINE": ,
+#         # "NAME" : ,
+#         # 'USER': ,
+#         # 'PASSWORD': ,
+
+
 #     }
 # }
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-# #DATABASES['default']['OPTIONS']['charset'] = 'utf8mb4'
-# #del DATABASES['default']['OPTIONS']['sslmode'] 
-# DATABASES['default']['OPTIONS']['ssl'] =  {'ca': os.environ.get('MYSQL_ATTR_SSL_CA')}
 
 
 # Password validation
@@ -165,16 +141,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
-#STATICFILES_DIRS=[BASE_DIR /'static']
-#STATICFILES_DIRS=os.path.join(BASE_DIR ,'static')
-#STATICFILES_ROOT=os.path.join(BASE_DIR ,'staticfiles_build','static')#
-# Location where Vercel will output static files
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-
-# Additional locations of static files
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
+STATIC_URL = 'static/'
+STATICFILES_DIRS=[BASE_DIR /'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -201,13 +169,16 @@ INSTALLED_APPS = [
 
 
 ]
-
-# Allow all origins
-CORS_ALLOW_ALL_ORIGINS = True
-
+MIDDLEWARE = [
+    # other middleware
+    'corsheaders.middleware.CorsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    # other middleware
+]
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',  # React development server
-    'https://fyp-frontend-iota.vercel.app',
 ]
 
 CORS_ALLOW_METHODS = [

@@ -1,4 +1,2 @@
-#!/bin/bash
-pip install -r Backend/requirements.txt
-python3.9 Backend/manage.py collectstatic --noinput
-python backend/manage.py migrate
+pip install -r requirements.txt
+python3.9 manage.py collectstatic 

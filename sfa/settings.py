@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'PDF_processing'
-    
+    'PDF_processing',
+   
 ]
 
 MIDDLEWARE = [
@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'sfa.urls'
@@ -122,10 +123,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS=[BASE_DIR /'static']
+STATIC_URL = '/static/'
+#STATICFILES_DIRS=[BASE_DIR /'static']
 #STATICFILES_DIRS=os.path.join(BASE_DIR ,'static')
-#STATICFILES_ROOT=os.path.join(BASE_DIR ,'staticfiles_build','static')
+#STATICFILES_ROOT=os.path.join(BASE_DIR ,'staticfiles_build','static')#
+# Location where Vercel will output static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+
+# Additional locations of static files
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 
 # Default primary key field type
@@ -159,10 +165,15 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.common.CommonMiddleware',
     # other middleware
 ]
+# Allow all origins
+CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',  # React development server
+    'https://fyp-frontend-iota.vercel.app/',
 ]
 
 CORS_ALLOW_METHODS = [

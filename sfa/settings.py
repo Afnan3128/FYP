@@ -173,7 +173,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',  # React development server
-    'https://fyp-frontend-iota.vercel.app/',
+    'https://fyp-frontend-iota.vercel.app',
 ]
 
 CORS_ALLOW_METHODS = [

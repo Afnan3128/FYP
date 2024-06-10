@@ -1,3 +1,10 @@
-# build.sh
 #!/bin/bash
-apt-get update && apt-get install -y libmysqlclient-dev
+
+# Build the project
+echo "Building the project..."
+python -m pip install -r requirements.txt
+echo "Make Migration..."
+python manage.py makemigrations --noinput
+python manage.py migrate --noinput
+echo "Collect Static..."
+python manage.py collectstatic --noinput --clear

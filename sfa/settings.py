@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-s3!4f4ucpai#d%x@i)&v7wcaatpra275@(e9c1d@x48+6h8!#g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 #ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['.vercel.app','.now.sh','127.0.0.1','localhost']
 
@@ -90,6 +90,7 @@ WSGI_APPLICATION = 'sfa.wsgi.application'
 # In settings.py
 import pymysql
 pymysql.install_as_MySQLdb()
+import dj_database_url
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -104,6 +105,10 @@ DATABASES = {
         'PORT': '3306',      # or the port on which your MySQL server is listening
     }
 }
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default']['OPTIONS']['charset'] = 'utf8mb4'
+del DATABASES['default']['OPTIONS']['sslmode'] 
+DATABASES['default']['OPTIONS']['ssl'] =  {'ca': os.environ.get('MYSQL_ATTR_SSL_CA')}
 
 
 # Password validation
@@ -140,7 +145,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 #STATICFILES_DIRS=[BASE_DIR /'static']
 #STATICFILES_DIRS=os.path.join(BASE_DIR ,'static')
 #STATICFILES_ROOT=os.path.join(BASE_DIR ,'staticfiles_build','static')#
